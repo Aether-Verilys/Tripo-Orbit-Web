@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { Apple, Monitor, Box, Rotate3D, ChevronDown } from 'lucide-vue-next';
+import { Box, Rotate3D, ChevronDown } from 'lucide-vue-next';
+import macIcon from '../assets/mac.webp';
+import winIcon from '../assets/windows.webp';
 
 const mouseX = ref(0);
 const mouseY = ref(0);
@@ -75,14 +77,14 @@ const viewerStyle = computed(() => ({
         :enter="{ opacity: 1, y: 0, transition: { duration: 800, delay: 600, ease: 'easeOut' } }"
         class="flex flex-col sm:flex-row items-center justify-center gap-4"
       >
-        <button class="w-full sm:w-auto flex items-center justify-center gap-3 bg-brand text-black px-8 py-4 rounded-full font-semibold hover:bg-[#ffe54d] hover:shadow-[0_0_30px_rgba(249,207,0,0.3)] transition-all duration-300">
-          <Apple class="w-5 h-5" />
+        <a href="https://tripo-public.tripo3d.ai/plugins/tripo-orbit/tripo-orbit-mac-latest.dmg" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-brand text-black px-8 py-4 rounded-full font-semibold hover:bg-[#ffe54d] hover:shadow-[0_0_30px_rgba(249,207,0,0.3)] transition-all duration-300">
+          <img :src="macIcon" class="w-6 h-6 brightness-0" alt="Mac" />
           <span>Mac 版下载</span>
-        </button>
-        <button class="w-full sm:w-auto flex items-center justify-center gap-3 glass-panel text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 hover:!shadow-[0_0_12px_rgba(255,255,255,0.15)] transition-all duration-300">
-          <Monitor class="w-5 h-5" />
+        </a>
+        <a href="https://tripo-public.tripo3d.ai/plugins/tripo-orbit/tripo-orbit-win-latest.exe" class="w-full sm:w-auto flex items-center justify-center gap-3 glass-panel text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 hover:!shadow-[0_0_12px_rgba(255,255,255,0.15)] transition-all duration-300">
+          <img :src="winIcon" class="w-5 h-5" alt="Windows" />
           <span>Windows 版下载</span>
-        </button>
+        </a>
       </div>
     </div>
 

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { Apple, Monitor, Zap } from 'lucide-vue-next';
+import { Zap } from 'lucide-vue-next';
+import macIcon from '../assets/mac.webp';
+import winIcon from '../assets/windows.webp';
 
 const features = [
   {
@@ -111,10 +113,10 @@ const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
               <div class="w-full max-w-xs h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
               <div class="flex items-center gap-10 text-white/30">
                 <div class="compat-float-a">
-                  <Apple class="w-12 h-12 text-white/80" />
+                  <img :src="macIcon" class="w-14 h-14" alt="Mac" />
                 </div>
                 <div class="compat-float-b">
-                  <Monitor class="w-12 h-12 text-white/80" />
+                  <img :src="winIcon" class="w-12 h-12" alt="Windows" />
                 </div>
               </div>
             </div>
