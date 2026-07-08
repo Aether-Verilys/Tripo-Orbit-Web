@@ -19,14 +19,14 @@ const downloadUrl = computed(() =>
       :visible-once="{ opacity: 1, y: 0, transition: { duration: 800 } }"
       class="max-w-3xl mx-auto flex flex-col items-center"
     >
-      <h2 class="text-4xl md:text-5xl font-bold mb-8 tracking-tight text-white">准备好体验未来了吗？</h2>
+      <h2 class="text-4xl md:text-5xl font-bold mb-8 tracking-tight text-white">Ready to Experience the Future?</h2>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
         <a :href="downloadUrl" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-white text-black px-10 py-4 rounded-full font-semibold hover:bg-gray-100 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all duration-300">
           <Download class="w-5 h-5" />
-          <span>免费下载</span>
+          <span>Free Download</span>
         </a>
       </div>
-      <p class="mt-8 text-white/40 text-sm">Beta 测试版已开放，欢迎免费使用。</p>
+      <p class="mt-8 text-white/40 text-sm">Beta is now open. Free to use.</p>
     </div>
   </section>
 </template>

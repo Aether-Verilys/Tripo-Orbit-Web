@@ -29,7 +29,7 @@ onUnmounted(() => window.removeEventListener('scroll', toggleVisibility));
       v-if="isVisible"
       @click="scrollToTop"
       class="fixed bottom-8 right-8 z-50 w-12 h-12 glass-panel rounded-full flex items-center justify-center text-white transition-all duration-300 group shadow-lg border border-white/20"
-      aria-label="回到顶部"
+      aria-label="Back to top"
     >
       <ArrowUp class="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
     </button>

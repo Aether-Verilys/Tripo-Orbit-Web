@@ -2,6 +2,7 @@
 import NavBar from './components/NavBar.vue';
 import HeroSection from './components/HeroSection.vue';
 import DynamicFeatures from './components/DynamicFeatures.vue';
+import ComparisonTable from './components/ComparisonTable.vue';
 import DownloadCTA from './components/DownloadCTA.vue';
 import FooterSection from './components/FooterSection.vue';
 import ScrollToTop from './components/ScrollToTop.vue';
@@ -15,6 +16,7 @@ import ParticleBackground from './components/ParticleBackground.vue';
     <NavBar />
     <HeroSection />
     <DynamicFeatures />
+    <ComparisonTable />
     <DownloadCTA />
     <FooterSection />
     <ScrollToTop />

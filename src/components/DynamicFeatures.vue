@@ -5,20 +5,20 @@ import winIcon from '../assets/windows.webp';
 
 const features = [
   {
-    title: '毫秒级极速渲染',
-    description: '自研超高性能渲染引擎，千万级面数模型瞬间加载，丝滑拖拽无卡顿，带来极致流畅的视觉享受。',
+    title: 'Millisecond Rendering',
+    description: 'Proprietary ultra-high-performance rendering engine. Models with tens of millions of polygons load instantly with buttery smooth interactions.',
     tag: 'PERFORMANCE',
     type: 'performance',
   },
   {
-    title: '全格式与多端无缝兼容',
-    description: '原生支持 GLTF, FBX, OBJ, STL 等十余种主流 3D 格式。为 Windows 与 macOS 深度定制优化，随时随地提供一致的极致体验。',
+    title: 'Seamless Cross-Platform Compatibility',
+    description: 'Native support for GLTF, FBX, OBJ, STL and 10+ mainstream 3D formats. Deeply optimized for both Windows and macOS.',
     tag: 'COMPATIBILITY',
     type: 'compatibility',
   },
   {
-    title: '可调 API 动态生成模型',
-    description: '内置大模型 API 接口支持，可通过文字指令一键动态生成 3D 资产，无缝衔接至渲染管线，拓展创意边界。',
+    title: 'API-Driven Model Generation',
+    description: 'Built-in AI model API support. Generate 3D assets dynamically with text prompts, seamlessly feeding into the rendering pipeline.',
     tag: 'AI GENERATION',
     type: 'api',
   },
@@ -37,8 +37,8 @@ const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
         :visible-once="{ opacity: 1, y: 0, transition: { duration: 600 } }"
         class="mb-24 text-center"
       >
-        <h2 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">重塑 3D 交互范式</h2>
-        <p class="text-white/50 text-xl max-w-2xl mx-auto">强大的底层性能与优雅的极简设计交织，让每一次模型探视都成为沉浸式的视觉享受。</p>
+        <h2 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Redefining 3D Interaction</h2>
+        <p class="text-white/50 text-xl max-w-2xl mx-auto">Powerful performance meets elegant minimalist design, turning every model inspection into an immersive visual experience.</p>
       </div>
 
       <div class="space-y-0">
@@ -54,8 +54,8 @@ const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
               <span class="w-8 h-px bg-brand"></span>
               PERFORMANCE
             </div>
-            <h3 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">毫秒级极速渲染</h3>
-            <p class="text-white/60 leading-relaxed text-lg md:text-2xl font-light">自研超高性能渲染引擎，千万级面数模型瞬间加载，丝滑拖拽无卡顿，带来极致流畅的视觉享受。</p>
+            <h3 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Millisecond Rendering</h3>
+            <p class="text-white/60 leading-relaxed text-lg md:text-2xl font-light">Proprietary ultra-high-performance rendering engine. Models with tens of millions of polygons load instantly with buttery smooth interactions.</p>
           </div>
           <div
             v-motion
@@ -87,8 +87,8 @@ const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
               <span class="w-8 h-px bg-brand"></span>
               COMPATIBILITY
             </div>
-            <h3 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">全格式与多端无缝兼容</h3>
-            <p class="text-white/60 leading-relaxed text-lg md:text-2xl font-light">原生支持 GLTF, FBX, OBJ, STL 等十余种主流 3D 格式。为 Windows 与 macOS 深度定制优化，随时随地提供一致的极致体验。</p>
+            <h3 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Seamless Cross-Platform Compatibility</h3>
+            <p class="text-white/60 leading-relaxed text-lg md:text-2xl font-light">Native support for GLTF, FBX, OBJ, STL and 10+ mainstream 3D formats. Deeply optimized for both Windows and macOS, delivering a consistent premium experience anywhere.</p>
           </div>
           <div
             v-motion
@@ -135,8 +135,8 @@ const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
               <span class="w-8 h-px bg-brand"></span>
               AI GENERATION
             </div>
-            <h3 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">可调 API 动态生成模型</h3>
-            <p class="text-white/60 leading-relaxed text-lg md:text-2xl font-light">内置大模型 API 接口支持，可通过文字指令一键动态生成 3D 资产，无缝衔接至渲染管线，拓展创意边界。</p>
+            <h3 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">API-Driven Model Generation</h3>
+            <p class="text-white/60 leading-relaxed text-lg md:text-2xl font-light">Built-in AI model API support. Generate 3D assets dynamically with text prompts, seamlessly feeding into the rendering pipeline to expand creative boundaries.</p>
           </div>
           <div
             v-motion

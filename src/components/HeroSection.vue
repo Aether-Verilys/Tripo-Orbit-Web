@@ -46,7 +46,7 @@ const viewerStyle = computed(() => ({
         class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-sm text-brand mb-8 border-brand/20 shadow-[0_0_20px_rgba(249,207,0,0.1)]"
       >
         <Rotate3D class="w-4 h-4" />
-        <span>全新一代 3D 查看引擎</span>
+        <span>Next-Gen 3D Viewing Engine</span>
       </div>
 
       <!-- Title -->
@@ -56,8 +56,8 @@ const viewerStyle = computed(() => ({
         :enter="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200, ease: 'easeOut' } }"
         class="text-5xl md:text-7xl font-bold tracking-tight leading-tight mb-6"
       >
-        探索 3D 视界，<br />
-        <span class="text-brand glow-text">毫秒间呈现</span>
+        Explore the 3D Universe,<br />
+        <span class="text-brand glow-text">Rendered in Milliseconds</span>
       </h1>
 
       <!-- Subtitle -->
@@ -67,7 +67,7 @@ const viewerStyle = computed(() => ({
         :enter="{ opacity: 1, y: 0, transition: { duration: 800, delay: 400, ease: 'easeOut' } }"
         class="text-lg md:text-xl text-white/60 mb-12 max-w-2xl mx-auto font-light leading-relaxed"
       >
-        Tripo Orbit 为极致性能而生。简约、纯粹，释放无尽的创造力。<br/>全格式兼容，双端原生优化，带来前所未有的丝滑交互。
+        Tripo Orbit is built for ultimate performance. Simple, pure, unleashing limitless creativity.<br/>Full format support, native optimization on both platforms, delivering an unprecedented smooth experience.
       </p>
 
       <!-- Buttons -->
@@ -79,11 +79,11 @@ const viewerStyle = computed(() => ({
       >
         <a href="https://tripo-public.tripo3d.ai/plugins/tripo-orbit/tripo-orbit-mac-latest.dmg" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-brand text-black px-8 py-4 rounded-full font-semibold hover:bg-[#ffe54d] hover:shadow-[0_0_30px_rgba(249,207,0,0.3)] transition-all duration-300">
           <img :src="macIcon" class="w-6 h-6 brightness-0" alt="Mac" />
-          <span>Mac 版下载</span>
+          <span>Download for Mac</span>
         </a>
         <a href="https://tripo-public.tripo3d.ai/plugins/tripo-orbit/tripo-orbit-win-latest.exe" class="w-full sm:w-auto flex items-center justify-center gap-3 glass-panel text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 hover:!shadow-[0_0_12px_rgba(255,255,255,0.15)] transition-all duration-300">
           <img :src="winIcon" class="w-5 h-5" alt="Windows" />
-          <span>Windows 版下载</span>
+          <span>Download for Windows</span>
         </a>
       </div>
     </div>
