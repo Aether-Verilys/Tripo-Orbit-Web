@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import appIcon from '../assets/app.webp';
+import LangSwitcher from './LangSwitcher.vue';
 </script>
 
 <template>
@@ -16,5 +17,6 @@ import appIcon from '../assets/app.webp';
         <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brand text-black tracking-widest mt-0.5">BETA</span>
       </div>
     </div>
+    <LangSwitcher />
   </nav>
 </template>

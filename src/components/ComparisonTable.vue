@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 import { Check, Star, Globe, Apple } from 'lucide-vue-next';
 import winIcon from '../assets/windows.webp';
 import macIcon from '../assets/mac.webp';
+
+const { t } = useI18n();
 
 // Define the comparison data
 const viewers = [
@@ -72,10 +75,10 @@ const renderStars = (rating: number) => {
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-5xl font-bold mb-6 font-display tracking-wide">
-          Why Choose <span class="text-primary z-10 relative">Us</span>
+          {{ t('comparison.title') }} <span class="text-primary z-10 relative">{{ t('comparison.titleHighlight') }}</span>
         </h2>
         <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-          See how our lightweight viewer stacks up against industry standards, delivering unmatched performance without the bloat.
+          {{ t('comparison.subtitle') }}
         </p>
       </div>
 
@@ -83,12 +86,12 @@ const renderStars = (rating: number) => {
         <table class="w-full text-left border-collapse">
           <thead>
             <tr>
-              <th class="p-4 border-b border-white/10 text-gray-400 font-medium">3D Viewer</th>
-              <th class="p-4 border-b border-white/10 text-gray-400 font-medium whitespace-nowrap">Loading Speed</th>
-              <th class="p-4 border-b border-white/10 text-gray-400 font-medium whitespace-nowrap">Polygon Capacity</th>
-              <th class="p-4 border-b border-white/10 text-gray-400 font-medium whitespace-nowrap">Ease of Use</th>
-              <th class="p-4 border-b border-white/10 text-gray-400 font-medium whitespace-nowrap">Format Support</th>
-              <th class="p-4 border-b border-white/10 text-gray-400 font-medium whitespace-nowrap">Platform</th>
+              <th class="p-4 border-b border-white/10 text-gray-400 font-medium">{{ t('comparison.viewer') }}</th>
+              <th class="p-4 border-b border-white/10 text-gray-400 font-medium whitespace-nowrap">{{ t('comparison.speed') }}</th>
+              <th class="p-4 border-b border-white/10 text-gray-400 font-medium whitespace-nowrap">{{ t('comparison.polygon') }}</th>
+              <th class="p-4 border-b border-white/10 text-gray-400 font-medium whitespace-nowrap">{{ t('comparison.ease') }}</th>
+              <th class="p-4 border-b border-white/10 text-gray-400 font-medium whitespace-nowrap">{{ t('comparison.format') }}</th>
+              <th class="p-4 border-b border-white/10 text-gray-400 font-medium whitespace-nowrap">{{ t('comparison.platform') }}</th>
             </tr>
           </thead>
           <tbody>

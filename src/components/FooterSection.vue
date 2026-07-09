@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 import appIcon from '../assets/app.webp';
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -10,7 +13,7 @@ import appIcon from '../assets/app.webp';
         <span class="text-lg font-display font-bold tracking-widest text-white">TRIPO ORBIT</span>
       </div>
       <p class="text-white/40 text-sm text-center md:text-left">
-        &copy; {{ new Date().getFullYear() }} Tripo 3D. All rights reserved.
+        &copy; {{ new Date().getFullYear() }} Tripo 3D. {{ t('footer.rights') }}
       </p>
       <div class="flex gap-6">
         <button class="text-white/40 hover:text-white text-sm transition-colors">Twitter</button>

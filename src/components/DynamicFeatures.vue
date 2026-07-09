@@ -1,28 +1,10 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 import { Zap } from 'lucide-vue-next';
 import macIcon from '../assets/mac.webp';
 import winIcon from '../assets/windows.webp';
 
-const features = [
-  {
-    title: 'Millisecond Rendering',
-    description: 'Proprietary ultra-high-performance rendering engine. Models with tens of millions of polygons load instantly with buttery smooth interactions.',
-    tag: 'PERFORMANCE',
-    type: 'performance',
-  },
-  {
-    title: 'Seamless Cross-Platform Compatibility',
-    description: 'Native support for GLTF, FBX, OBJ, STL and 10+ mainstream 3D formats. Deeply optimized for both Windows and macOS.',
-    tag: 'COMPATIBILITY',
-    type: 'compatibility',
-  },
-  {
-    title: 'API-Driven Model Generation',
-    description: 'Built-in AI model API support. Generate 3D assets dynamically with text prompts, seamlessly feeding into the rendering pipeline.',
-    tag: 'AI GENERATION',
-    type: 'api',
-  },
-];
+const { t } = useI18n();
 
 const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
 </script>
@@ -37,8 +19,8 @@ const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
         :visible-once="{ opacity: 1, y: 0, transition: { duration: 600 } }"
         class="mb-24 text-center"
       >
-        <h2 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Redefining 3D Interaction</h2>
-        <p class="text-white/50 text-xl max-w-2xl mx-auto">Powerful performance meets elegant minimalist design, turning every model inspection into an immersive visual experience.</p>
+        <h2 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">{{ t('features.heading') }}</h2>
+        <p class="text-white/50 text-xl max-w-2xl mx-auto">{{ t('features.subheading') }}</p>
       </div>
 
       <div class="space-y-0">
@@ -52,10 +34,10 @@ const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
           >
             <div class="inline-flex items-center justify-center md:justify-start gap-2 text-brand font-mono text-sm mb-6 uppercase tracking-widest">
               <span class="w-8 h-px bg-brand"></span>
-              PERFORMANCE
+              {{ t('features.perf.tag') }}
             </div>
-            <h3 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Millisecond Rendering</h3>
-            <p class="text-white/60 leading-relaxed text-lg md:text-2xl font-light">Proprietary ultra-high-performance rendering engine. Models with tens of millions of polygons load instantly with buttery smooth interactions.</p>
+            <h3 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">{{ t('features.perf.title') }}</h3>
+            <p class="text-white/60 leading-relaxed text-lg md:text-2xl font-light">{{ t('features.perf.desc') }}</p>
           </div>
           <div
             v-motion
@@ -85,10 +67,10 @@ const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
           >
             <div class="inline-flex items-center justify-center md:justify-start gap-2 text-brand font-mono text-sm mb-6 uppercase tracking-widest">
               <span class="w-8 h-px bg-brand"></span>
-              COMPATIBILITY
+              {{ t('features.compat.tag') }}
             </div>
-            <h3 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Seamless Cross-Platform Compatibility</h3>
-            <p class="text-white/60 leading-relaxed text-lg md:text-2xl font-light">Native support for GLTF, FBX, OBJ, STL and 10+ mainstream 3D formats. Deeply optimized for both Windows and macOS, delivering a consistent premium experience anywhere.</p>
+            <h3 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">{{ t('features.compat.title') }}</h3>
+            <p class="text-white/60 leading-relaxed text-lg md:text-2xl font-light">{{ t('features.compat.desc') }}</p>
           </div>
           <div
             v-motion
@@ -133,10 +115,10 @@ const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
           >
             <div class="inline-flex items-center justify-center md:justify-start gap-2 text-brand font-mono text-sm mb-6 uppercase tracking-widest">
               <span class="w-8 h-px bg-brand"></span>
-              AI GENERATION
+              {{ t('features.api.tag') }}
             </div>
-            <h3 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">API-Driven Model Generation</h3>
-            <p class="text-white/60 leading-relaxed text-lg md:text-2xl font-light">Built-in AI model API support. Generate 3D assets dynamically with text prompts, seamlessly feeding into the rendering pipeline to expand creative boundaries.</p>
+            <h3 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">{{ t('features.api.title') }}</h3>
+            <p class="text-white/60 leading-relaxed text-lg md:text-2xl font-light">{{ t('features.api.desc') }}</p>
           </div>
           <div
             v-motion
