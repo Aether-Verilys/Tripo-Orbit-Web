@@ -17,7 +17,7 @@ const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
         v-motion
         :initial="{ opacity: 0, y: 20 }"
         :visible-once="{ opacity: 1, y: 0, transition: { duration: 600 } }"
-        class="mb-24 text-center"
+        class="mb-12 text-center"
       >
         <h2 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">{{ t('features.heading') }}</h2>
         <p class="text-white/50 text-xl max-w-2xl mx-auto">{{ t('features.subheading') }}</p>
