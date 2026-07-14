@@ -6,7 +6,7 @@ import winIcon from '../assets/windows.webp';
 
 const { t } = useI18n();
 
-const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
+const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'PLY', 'USDZ', '...'];
 </script>
 
 <template>
@@ -50,9 +50,14 @@ const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
               <div class="perf-ring-outer w-48 h-48 md:w-64 md:h-64 rounded-full border border-brand/30 border-t-brand border-r-transparent flex items-center justify-center">
                 <div class="perf-ring-inner w-32 h-32 md:w-48 md:h-48 rounded-full border border-brand/20 border-b-brand border-l-transparent"></div>
               </div>
-              <div class="absolute text-5xl md:text-7xl font-display font-bold text-white italic tracking-tighter">
-                2<span class="text-3xl md:text-4xl text-brand">ms</span>
+              <div class="absolute inset-0 flex items-center justify-center px-8 text-center">
+                <div class="text-5xl md:text-7xl font-display font-bold text-white italic tracking-tighter">
+                  0.5<span class="text-3xl md:text-4xl text-brand">s</span>
+                </div>
               </div>
+              <p class="absolute bottom-8 left-1/2 w-full max-w-xs -translate-x-1/2 px-6 text-center text-xs md:text-sm leading-relaxed text-white/45">
+                {{ t('features.perf.note') }}
+              </p>
             </div>
           </div>
         </div>
@@ -79,7 +84,7 @@ const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
             class="w-full md:w-1/2 h-[50vh] md:h-[70vh] rounded-[2rem] md:rounded-[3rem] glass-panel border border-white/10 flex items-center justify-center bg-black/50 shadow-2xl overflow-hidden relative md:order-1"
           >
             <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(249,207,0,0.05)_0%,transparent_70%)]"></div>
-            <div class="flex flex-col items-center justify-center gap-10 w-full px-6">
+            <div class="flex flex-col items-center justify-center gap-10 w-full h-full px-6 pb-16">
               <div class="flex flex-wrap items-center justify-center gap-3">
                 <div
                   v-for="(f, i) in formats"
@@ -102,6 +107,9 @@ const formats = ['OBJ', 'FBX', 'GLTF', 'STL', 'USDZ'];
                 </div>
               </div>
             </div>
+            <p class="absolute bottom-8 left-1/2 w-full max-w-sm -translate-x-1/2 px-6 text-center text-xs md:text-sm leading-relaxed text-white/45">
+              {{ t('features.compat.note') }}
+            </p>
           </div>
         </div>
 

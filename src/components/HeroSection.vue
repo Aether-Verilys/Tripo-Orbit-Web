@@ -141,10 +141,10 @@ const viewerStyle = computed(() => ({
       v-motion
       :initial="{ opacity: 0 }"
       :enter="{ opacity: 1, transition: { delay: 1500, duration: 1000 } }"
-      class="mt-12 flex flex-col items-center gap-2 text-white/30 animate-bounce z-10"
+      class="mt-14 flex flex-col items-center gap-3 text-white/30 animate-bounce z-10"
     >
-      <span class="text-[10px] tracking-widest uppercase">{{ t('hero.scroll') }}</span>
-      <ChevronDown class="w-4 h-4" />
+      <span class="text-xs md:text-sm tracking-[0.3em] uppercase">{{ t('hero.scroll') }}</span>
+      <ChevronDown class="w-5 h-5 md:w-6 md:h-6" />
     </div>
   </section>
 </template>
