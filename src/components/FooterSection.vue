@@ -16,9 +16,9 @@ const { t } = useI18n();
         &copy; {{ new Date().getFullYear() }} Tripo 3D. {{ t('footer.rights') }}
       </p>
       <div class="flex gap-6">
-        <button class="text-white/40 hover:text-white text-sm transition-colors">Twitter</button>
-        <button class="text-white/40 hover:text-white text-sm transition-colors">GitHub</button>
-        <button class="text-white/40 hover:text-white text-sm transition-colors">Discord</button>
+        <a href="https://twitter.com/tripoai" target="_blank" rel="noopener noreferrer" class="text-white/40 hover:text-white text-sm transition-colors">X</a>
+        <a href="https://discord.com/invite/tripoai" target="_blank" rel="noopener noreferrer" class="text-white/40 hover:text-white text-sm transition-colors">Discord</a>
+        <a href="https://www.youtube.com/channel/UCUxEy0OUAdRja1OOdTNL6oQ" target="_blank" rel="noopener noreferrer" class="text-white/40 hover:text-white text-sm transition-colors">YouTube</a>
       </div>
     </div>
   </footer>
