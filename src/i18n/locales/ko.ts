@@ -6,8 +6,8 @@ export default {
   },
   hero: {
     badge: '차세대 3D 시각화 엔진',
-    title1: '3D 유니버스를 탐험하세요,',
-    title2: '밀리초 렌더링',
+    title1: 'Tripo Orbit',
+    title2: '고성능 3D 모델 뷰어',
     subtitle: 'Tripo Orbit은 궁극의 성능을 위해 만들어졌습니다.',
     subtitle2: '심플하고 순수합니다. 3D 모델 보기는 이미지를 보듯 쉽게 할 수 있습니다.',
     downloadMac: 'Mac용 다운로드',
@@ -25,14 +25,41 @@ export default {
     },
     compat: {
       tag: '호환성',
-      title: '원활한 크로스 플랫폼 호환성',
-      desc: 'GLTF, FBX, OBJ, STL 등 10개 이상의 포맷을 네이티브 지원하며, Windows 사이드바 미리보기를 지원합니다. 파일을 더블클릭해 바로 열 수 있어 모델을 더욱 편리하게 볼 수 있습니다.',
+      title: '10개 이상의 형식 기본 지원',
+      desc: 'GLTF, FBX, OBJ, STL 등 10개 이상의 형식을 기본 지원합니다. 변환 없이 파일을 끌어다 놓기만 하면 됩니다.',
       note: '다양한 포맷의 모델 보기, 재질 및 텍스처 검사, 애니메이션 미리보기를 지원합니다',
+    },
+    platform: {
+      tag: '크로스 플랫폼',
+      title: '원활한 크로스 플랫폼 호환성',
+      desc: 'Windows와 macOS에서 사용할 수 있습니다. Windows 사이드바에서 미리 보고, 더블 클릭으로 파일을 엽니다.',
     },
     api: {
       tag: 'AI 구동',
       title: 'AIGC 3D 워크플로우',
       desc: '내장 API 지원으로 텍스트와 이미지를 통해 3D 에셋을 직접 생성하고, 모델 Raw Data를 AI 분석용으로 내보내 생성과 이해를 하나의 워크플로우로 연결합니다',
+    },
+  },
+  demo: {
+    faces: '면',
+    verts: '정점',
+    perf: {
+      loadedIn: '{t}초 만에 로드 완료',
+    },
+    formats: {
+      drop: '여기에 파일을 놓으세요',
+      loaded: '{fmt} 열림',
+      all: '{n}개 형식 모두 열림',
+      hint: '아이콘을 클릭해 던져 넣어 보세요',
+    },
+    aigc: {
+      prompt: '후드 재킷을 입은 사이버펑크 소녀',
+      generate: '생성',
+      generating: '생성 중',
+      export: 'Raw Data 내보내기',
+      text: '텍스트',
+      image: '이미지',
+      toAi: 'AI에 보내 분석',
     },
   },
   cta: {

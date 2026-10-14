@@ -6,8 +6,8 @@ export default {
   },
   hero: {
     badge: '次世代3D可視化エンジン',
-    title1: '3D ユニバースを探索、',
-    title2: 'ミリ秒でレンダリング',
+    title1: 'Tripo Orbit',
+    title2: '高性能 3D モデルビューア',
     subtitle: 'Tripo Orbit は究極のパフォーマンスのために作られています。',
     subtitle2: 'シンプルでピュア。3Dモデルの表示は画像を見るように簡単です。',
     downloadMac: 'Mac 版ダウンロード',
@@ -25,14 +25,41 @@ export default {
     },
     compat: {
       tag: '互換性',
-      title: 'シームレスなクロスプラットフォーム互換性',
-      desc: 'GLTF、FBX、OBJ、STL など 10 以上のフォーマットをネイティブサポートし、Windows サイドバープレビューに対応。ダブルクリックでファイルを開けるため、より手軽にモデルを閲覧できます。',
+      title: '10 以上の形式にネイティブ対応',
+      desc: 'GLTF、FBX、OBJ、STL など 10 以上の形式にネイティブ対応。変換不要、ドロップするだけで表示できます。',
       note: '多形式モデルの表示、マテリアルとテクスチャの確認、アニメーションプレビューに対応',
+    },
+    platform: {
+      tag: 'クロスプラットフォーム',
+      title: 'シームレスなクロスプラットフォーム互換性',
+      desc: 'Windows と macOS に対応。Windows のサイドバーでプレビューでき、ダブルクリックでファイルを開けます。',
     },
     api: {
       tag: 'AI 駆動',
       title: 'AIGC 3D ワークフロー',
       desc: '内蔵 API により、テキストと画像から 3D アセットを直接生成でき、さらにモデルの Raw Data を AI 分析用に書き出すことで、生成と理解をひとつのワークフローに統合します',
+    },
+  },
+  demo: {
+    faces: '面',
+    verts: '頂点',
+    perf: {
+      loadedIn: '{t} 秒で読み込み完了',
+    },
+    formats: {
+      drop: 'ここにファイルをドロップ',
+      loaded: '{fmt} を開きました',
+      all: '{n} 形式すべて読み込み完了',
+      hint: 'アイコンをクリックして投げ込もう',
+    },
+    aigc: {
+      prompt: 'フード付きジャケットのサイバーパンク少女',
+      generate: '生成',
+      generating: '生成中',
+      export: 'Raw Data を書き出す',
+      text: 'テキスト',
+      image: '画像',
+      toAi: 'AI に送って解析',
     },
   },
   cta: {
