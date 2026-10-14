@@ -6,8 +6,8 @@ export default {
   },
   hero: {
     badge: '3D-Visualisierungs-Engine der nächsten Generation',
-    title1: 'Erkunden Sie das 3D-Universum,',
-    title2: 'In Millisekunden gerendert',
+    title1: 'Tripo Orbit',
+    title2: 'Leistungsstarker 3D-Modell-Viewer',
     subtitle: 'Tripo Orbit wurde für ultimative Leistung entwickelt.',
     subtitle2: 'Einfach und pur. 3D-Modelle anzusehen ist so leicht wie das Betrachten eines Bildes.',
     downloadMac: 'Für Mac herunterladen',
@@ -25,14 +25,41 @@ export default {
     },
     compat: {
       tag: 'KOMPATIBILITÄT',
-      title: 'Nahtlose plattformübergreifende Kompatibilität',
-      desc: 'Native Unterstützung für GLTF, FBX, OBJ, STL und über 10 Formate, mit Windows-Seitenleisten-Vorschau und Öffnen per Doppelklick für eine bequemere Modellansicht.',
+      title: 'Über 10 Formate nativ unterstützt',
+      desc: 'Öffnet GLTF, FBX, OBJ, STL und über 10 weitere Formate nativ. Keine Konvertierung nötig: Datei einfach hineinziehen.',
       note: 'Unterstützt modellübergreifende Ansicht, Material- und Texturprüfung sowie Animationsvorschau',
+    },
+    platform: {
+      tag: 'PLATTFORMÜBERGREIFEND',
+      title: 'Nahtlose plattformübergreifende Kompatibilität',
+      desc: 'Für Windows und macOS. Vorschau in der Windows-Seitenleiste, Öffnen per Doppelklick.',
     },
     api: {
       tag: 'KI-GESTEUERT',
       title: 'AIGC-3D-Workflow',
       desc: 'Mit integrierter API-Unterstützung lassen sich 3D-Assets direkt aus Text und Bildern erzeugen und Modell-Raw-Data zur KI-Analyse exportieren, sodass Generierung und Verständnis in einem Workflow zusammenkommen',
+    },
+  },
+  demo: {
+    faces: 'Flächen',
+    verts: 'Vertices',
+    perf: {
+      loadedIn: 'In {t} s geladen',
+    },
+    formats: {
+      drop: 'Dateien hier ablegen',
+      loaded: '{fmt} geöffnet',
+      all: 'Alle {n} Formate geöffnet',
+      hint: 'Klicke ein Symbol, um es hineinzuwerfen',
+    },
+    aigc: {
+      prompt: 'Ein Cyberpunk-Mädchen in Kapuzenjacke',
+      generate: 'Erzeugen',
+      generating: 'Wird erzeugt',
+      export: 'Raw Data exportieren',
+      text: 'Text',
+      image: 'Bild',
+      toAi: 'Zur Analyse an KI senden',
     },
   },
   cta: {

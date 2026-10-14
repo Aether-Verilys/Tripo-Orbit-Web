@@ -6,8 +6,8 @@ export default {
   },
   hero: {
     badge: '新一代3D可视化引擎',
-    title1: '打开 3D 模型，',
-    title2: '查看更简单',
+    title1: 'Tripo Orbit',
+    title2: '高性能 3D 模型查看器',
     subtitle: 'Tripo Orbit 为极致性能而生。',
     subtitle2: '简洁、纯粹。查看3D模型就像看图片一样简单。',
     downloadMac: '下载 Mac 版',
@@ -25,14 +25,41 @@ export default {
     },
     compat: {
       tag: '兼容性',
-      title: '无缝跨平台兼容',
-      desc: '原生支持 GLTF、FBX、OBJ、STL 等 10+ 格式，支持 Windows 侧边栏预览，双击即可打开文件，让模型查看更方便。',
+      title: '10+ 格式原生支持',
+      desc: '原生支持 GLTF、FBX、OBJ、STL 等 10+ 格式，无需转换，拖入即可查看。',
       note: '支持多格式模型查看、材质贴图检查与动画预览',
+    },
+    platform: {
+      tag: '跨平台',
+      title: '无缝跨平台兼容',
+      desc: 'Windows 与 macOS 均可使用。支持 Windows 侧边栏预览，双击即可打开文件，让模型查看更方便。',
     },
     api: {
       tag: 'AI 驱动',
       title: 'AIGC 3D 工作流',
       desc: '内置 API 支持，通过文字和图片可直接生成 3D 资产，并导出模型 Raw Data 供 AI 分析，让生成与理解一体化完成',
+    },
+  },
+  demo: {
+    faces: '面',
+    verts: '顶点',
+    perf: {
+      loadedIn: '{t}s 完成加载',
+    },
+    formats: {
+      drop: '拖入文件',
+      loaded: '{fmt} 已打开',
+      all: '{n} 种格式全部打开',
+      hint: '点击图标，把文件丢进去',
+    },
+    aigc: {
+      prompt: '一个穿连帽夹克的赛博朋克女孩',
+      generate: '生成',
+      generating: '生成中',
+      export: '导出 Raw Data',
+      text: '文字',
+      image: '图片',
+      toAi: '发送给 AI 分析',
     },
   },
   cta: {

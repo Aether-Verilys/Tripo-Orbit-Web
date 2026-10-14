@@ -23,4 +23,100 @@ body {
 
 .glow-text {
   text-shadow: 0 0 20px rgba(249, 207, 0, 0.5);
+  animation: glow-breathe 4s ease-in-out infinite;
+}
+
+@keyframes glow-breathe {
+  0%, 100% { text-shadow: 0 0 16px rgba(249, 207, 0, 0.35); }
+  50% { text-shadow: 0 0 34px rgba(249, 207, 0, 0.7); }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Light sweep across a button on hover */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+.btn-shine:hover::after {
+  transform: translateX(120%);
+  transition: transform 0.7s ease;
+}
+
+/* Cursor-following glow, driven by --mx / --my from the v-spotlight directive */
+.spotlight::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(249, 207, 0, 0.1), transparent 60%);
+}
+.spotlight:hover::after {
+  opacity: 1;
+}
+
+/* Children are pulled out from the left one after another; toggled by the v-reveal directive */
+.reveal-left > * {
+  opacity: 0;
+  transform: translateX(-56px);
+  clip-path: inset(-10% 100% -10% 0);
+  transition: opacity 0.3s ease, transform 0.3s ease, clip-path 0.3s ease;
+}
+.reveal-left.is-in > * {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(-10% -5% -10% -5%);
+  transition: opacity 0.6s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-left.is-in > :nth-child(2) { transition-delay: 0.12s; }
+.reveal-left.is-in > :nth-child(3) { transition-delay: 0.26s; }
+
+/* Accent rule that draws itself once its .reveal-left ancestor is in view */
+.reveal-rule {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.is-in .reveal-rule {
+  transform: scaleX(1);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+
+/* Buttons inside the mock Orbit window (components/demos) */
+.demo-chip {
+  display: block;
+  padding: 2px 0;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 9px;
+  background: #4a4a4f;
+  color: rgba(255, 255, 255, 0.75);
+}
+.demo-chip-on {
+  background: var(--color-brand);
+  color: #000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

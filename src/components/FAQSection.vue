@@ -56,6 +56,7 @@ const faqs = [
         >
           <button
             class="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+            :aria-expanded="openSet.has(index)"
             @click="toggle(index)"
           >
             <span class="font-semibold text-base md:text-lg leading-snug">
@@ -66,18 +67,15 @@ const faqs = [
               :class="{ 'rotate-180 text-[#F9CF00]': openSet.has(index) }"
             />
           </button>
-          <Transition
-            enter-active-class="transition-all duration-300 ease-out"
-            enter-from-class="opacity-0 max-h-0"
-            enter-to-class="opacity-100 max-h-96"
-            leave-active-class="transition-all duration-200 ease-in"
-            leave-from-class="opacity-100 max-h-96"
-            leave-to-class="opacity-0 max-h-0"
+          <div
+            class="grid transition-[grid-template-rows,opacity] duration-300 ease-out"
+            :class="openSet.has(index) ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"
+            :aria-hidden="!openSet.has(index)"
           >
-            <div v-if="openSet.has(index)" class="px-6 pb-5">
-              <p class="text-white/60 text-sm md:text-base leading-relaxed">{{ t(item.a) }}</p>
+            <div class="overflow-hidden">
+              <p class="px-6 pb-5 text-white/60 text-sm md:text-base leading-relaxed">{{ t(item.a) }}</p>
             </div>
-          </Transition>
+          </div>
         </div>
       </div>
     </div>

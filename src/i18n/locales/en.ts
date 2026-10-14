@@ -6,8 +6,8 @@ export default {
   },
   hero: {
     badge: 'Next-Gen 3D Visualization Engine',
-    title1: 'Explore the 3D Universe,',
-    title2: 'Rendered in Milliseconds',
+    title1: 'Tripo Orbit',
+    title2: 'High-Performance 3D Model Viewer',
     subtitle: 'Tripo Orbit is built for ultimate performance.',
     subtitle2: 'Simple and pure. Viewing 3D models is as easy as viewing an image.',
     downloadMac: 'Download for Mac',
@@ -25,14 +25,41 @@ export default {
     },
     compat: {
       tag: 'COMPATIBILITY',
-      title: 'Seamless Cross-Platform Compatibility',
-      desc: 'Native support for GLTF, FBX, OBJ, STL, and 10+ formats, with Windows sidebar preview and double-click file opening for more convenient model viewing.',
+      title: 'Native Support for 10+ Formats',
+      desc: 'Opens GLTF, FBX, OBJ, STL, and 10+ formats natively. No conversion needed: just drop a file in.',
       note: 'Supports multi-format model viewing, material and texture inspection, and animation preview',
+    },
+    platform: {
+      tag: 'CROSS-PLATFORM',
+      title: 'Seamless Cross-Platform Compatibility',
+      desc: 'Available on Windows and macOS. Preview models in the Windows sidebar, or double-click any file to open it.',
     },
     api: {
       tag: 'AI-DRIVEN',
       title: 'AIGC 3D Workflow',
       desc: 'Built-in API support lets you generate 3D assets directly from text and images, and export model Raw Data for AI analysis, bringing generation and understanding into one workflow',
+    },
+  },
+  demo: {
+    faces: 'faces',
+    verts: 'verts',
+    perf: {
+      loadedIn: 'Loaded in {t}s',
+    },
+    formats: {
+      drop: 'Drop files here',
+      loaded: '{fmt} loaded',
+      all: 'All {n} formats loaded',
+      hint: 'Click an icon to throw it in',
+    },
+    aigc: {
+      prompt: 'A cyberpunk girl in a hooded jacket',
+      generate: 'Generate',
+      generating: 'Generating',
+      export: 'Export Raw Data',
+      text: 'Text',
+      image: 'Image',
+      toAi: 'Send to AI for analysis',
     },
   },
   cta: {

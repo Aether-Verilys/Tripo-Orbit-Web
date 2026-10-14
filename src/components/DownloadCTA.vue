@@ -23,8 +23,8 @@ const downloadUrl = computed(() =>
     >
       <h2 class="text-4xl md:text-5xl font-bold mb-8 tracking-tight text-white">{{ t('cta.title') }}</h2>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
-        <a :href="downloadUrl" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-white text-black px-10 py-4 rounded-full font-semibold hover:bg-gray-100 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all duration-300">
-          <Download class="w-5 h-5" />
+        <a :href="downloadUrl" class="cta-pulse group w-full sm:w-auto flex items-center justify-center gap-3 bg-white text-black px-10 py-4 rounded-full font-semibold btn-shine hover:bg-gray-100 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-300">
+          <Download class="w-5 h-5 transition-transform duration-300 group-hover:translate-y-0.5" />
           <span>{{ t('cta.freeDownload') }}</span>
         </a>
       </div>
@@ -32,3 +32,13 @@ const downloadUrl = computed(() =>
     </div>
   </section>
 </template>
+
+<style scoped>
+@keyframes cta-ring {
+  0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.35); }
+  70%, 100% { box-shadow: 0 0 0 18px rgba(255, 255, 255, 0); }
+}
+.cta-pulse {
+  animation: cta-ring 2.4s ease-out infinite;
+}
+</style>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useIntersectionObserver } from '@vueuse/core';
 import { Check, Star, Globe, Apple } from 'lucide-vue-next';
 import winIcon from '../assets/windows.webp';
 import macIcon from '../assets/mac.webp';
@@ -64,25 +66,46 @@ const viewers = [
   }
 ];
 
+const metrics = ['speed', 'polygon', 'ease', 'format'] as const;
+
 // Helper to render stars
 const renderStars = (rating: number) => {
   return Array.from({ length: 5 }, (_, i) => i < rating);
 };
+
+// Rows and stars play their entrance once the table scrolls into view
+const tableRef = ref<HTMLElement | null>(null);
+const inView = ref(false);
+const { stop } = useIntersectionObserver(
+  tableRef,
+  ([entry]) => {
+    if (entry?.isIntersecting) {
+      inView.value = true;
+      stop();
+    }
+  },
+  { threshold: 0.15 },
+);
 </script>
 
 <template>
-  <section class="py-20 bg-background/50 relative z-10" id="comparison">
+  <section class="py-20 relative z-10" id="comparison">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16">
+      <div
+        v-motion
+        :initial="{ opacity: 0, y: 20 }"
+        :visible-once="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+        class="text-center mb-16"
+      >
         <h2 class="text-3xl md:text-5xl font-bold mb-6 font-display tracking-wide">
-          {{ t('comparison.title') }} <span class="text-primary z-10 relative">{{ t('comparison.titleHighlight') }}</span>
+          {{ t('comparison.title') }} <span class="text-brand z-10 relative">{{ t('comparison.titleHighlight') }}</span>
         </h2>
         <p class="text-gray-400 text-lg max-w-2xl mx-auto">
           {{ t('comparison.subtitle') }}
         </p>
       </div>
 
-      <div class="overflow-x-auto">
+      <div ref="tableRef" class="cmp-table overflow-x-auto" :class="{ 'is-in': inView }">
         <table class="w-full text-left border-collapse">
           <thead>
             <tr>
@@ -95,41 +118,22 @@ const renderStars = (rating: number) => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(viewer, index) in viewers" :key="index" 
-                class="border-b transition-colors"
-                :class="viewer.highlight ? 'bg-primary/5 hover:bg-primary/10 border-primary/50' : 'border-white/5 hover:bg-white/5'">
-              <td class="p-4 font-medium" :class="viewer.highlight ? 'text-primary font-bold text-lg' : 'text-gray-200'">
+            <tr v-for="(viewer, index) in viewers" :key="index"
+                class="cmp-row border-b transition-colors"
+                :style="{ '--row': index }"
+                :class="viewer.highlight ? 'bg-brand/5 hover:bg-brand/10 border-brand/50' : 'border-white/5 hover:bg-white/5'">
+              <td class="p-4 font-medium" :class="viewer.highlight ? 'text-brand font-bold text-lg' : 'text-gray-200'">
                 <div class="flex items-center gap-2">
-                  <Check v-if="viewer.highlight" class="w-4 h-4 text-primary" />
+                  <Check v-if="viewer.highlight" class="w-4 h-4 text-brand" />
                   {{ viewer.name }}
                 </div>
               </td>
-              <td class="p-4">
+              <td v-for="metric in metrics" :key="metric" class="p-4">
                 <div class="flex gap-1">
-                  <Star v-for="(filled, i) in renderStars(viewer.speed)" :key="'speed-'+i" 
-                        class="w-4 h-4" 
-                        :class="filled ? (viewer.highlight ? 'text-yellow-400 fill-yellow-400' : 'text-primary fill-primary') : 'text-white/10 fill-transparent'" />
-                </div>
-              </td>
-              <td class="p-4">
-                <div class="flex gap-1">
-                  <Star v-for="(filled, i) in renderStars(viewer.polygon)" :key="'polygon-'+i" 
-                        class="w-4 h-4" 
-                        :class="filled ? (viewer.highlight ? 'text-yellow-400 fill-yellow-400' : 'text-primary fill-primary') : 'text-white/10 fill-transparent'" />
-                </div>
-              </td>
-              <td class="p-4">
-                <div class="flex gap-1">
-                  <Star v-for="(filled, i) in renderStars(viewer.ease)" :key="'ease-'+i" 
-                        class="w-4 h-4" 
-                        :class="filled ? (viewer.highlight ? 'text-yellow-400 fill-yellow-400' : 'text-primary fill-primary') : 'text-white/10 fill-transparent'" />
-                </div>
-              </td>
-              <td class="p-4">
-                <div class="flex gap-1">
-                  <Star v-for="(filled, i) in renderStars(viewer.format)" :key="'format-'+i" 
-                        class="w-4 h-4" 
-                        :class="filled ? (viewer.highlight ? 'text-yellow-400 fill-yellow-400' : 'text-primary fill-primary') : 'text-white/10 fill-transparent'" />
+                  <Star v-for="(filled, i) in renderStars(viewer[metric])" :key="i"
+                        class="w-4 h-4"
+                        :style="{ '--star': i }"
+                        :class="filled ? ['cmp-star-on', viewer.highlight ? 'text-brand fill-brand' : 'text-white/60 fill-white/60'] : 'text-white/10 fill-transparent'" />
                 </div>
               </td>
               <td class="p-4">
@@ -146,3 +150,27 @@ const renderStars = (rating: number) => {
     </div>
   </section>
 </template>
+
+<style scoped>
+@keyframes cmp-row-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes cmp-star-pop {
+  0% { opacity: 0; transform: scale(0.3); }
+  70% { opacity: 1; transform: scale(1.25); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.cmp-table:not(.is-in) .cmp-row {
+  opacity: 0;
+}
+.cmp-table.is-in .cmp-row {
+  animation: cmp-row-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--row) * 70ms);
+}
+.cmp-table.is-in :deep(.cmp-star-on) {
+  animation: cmp-star-pop 0.4s ease-out both;
+  animation-delay: calc(var(--row) * 70ms + var(--star) * 50ms + 250ms);
+}
+</style>

@@ -1,3 +1,4 @@
+import { watch } from 'vue';
 import { createI18n } from 'vue-i18n';
 import en from './locales/en';
 import zh from './locales/zh';
@@ -28,5 +29,8 @@ const i18n = createI18n({
   fallbackLocale: 'en',
   messages: { en, zh, ja, ko, de, fr, es, ru },
 });
+
+// Keep <html lang> in step with the UI language, so browsers don't offer to translate the page
+watch(i18n.global.locale, (locale) => { document.documentElement.lang = locale; }, { immediate: true });
 
 export default i18n;

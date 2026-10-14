@@ -6,8 +6,8 @@ export default {
   },
   hero: {
     badge: 'Motor de visualización 3D de nueva generación',
-    title1: 'Explora el universo 3D,',
-    title2: 'Renderizado en milisegundos',
+    title1: 'Tripo Orbit',
+    title2: 'Visor 3D de alto rendimiento',
     subtitle: 'Tripo Orbit está diseñado para un rendimiento máximo.',
     subtitle2: 'Simple y puro. Ver modelos 3D es tan fácil como ver una imagen.',
     downloadMac: 'Descargar para Mac',
@@ -25,14 +25,41 @@ export default {
     },
     compat: {
       tag: 'COMPATIBILIDAD',
-      title: 'Compatibilidad multiplataforma perfecta',
-      desc: 'Soporte nativo para GLTF, FBX, OBJ, STL y más de 10 formatos, con vista previa en la barra lateral de Windows y apertura de archivos con doble clic para una visualización de modelos más cómoda.',
+      title: 'Más de 10 formatos compatibles',
+      desc: 'Abre de forma nativa GLTF, FBX, OBJ, STL y más de 10 formatos. Sin conversiones: basta con soltar el archivo.',
       note: 'Admite visualización de modelos en múltiples formatos, inspección de materiales y texturas, y vista previa de animaciones',
+    },
+    platform: {
+      tag: 'MULTIPLATAFORMA',
+      title: 'Compatibilidad multiplataforma perfecta',
+      desc: 'Disponible en Windows y macOS. Vista previa en el panel lateral de Windows y apertura con doble clic.',
     },
     api: {
       tag: 'IMPULSADO POR IA',
       title: 'Flujo de trabajo 3D AIGC',
       desc: 'El soporte de API integrado permite generar activos 3D directamente a partir de texto e imágenes, y exportar Raw Data del modelo para el análisis por IA, unificando generación y comprensión en un solo flujo',
+    },
+  },
+  demo: {
+    faces: 'caras',
+    verts: 'vértices',
+    perf: {
+      loadedIn: 'Cargado en {t} s',
+    },
+    formats: {
+      drop: 'Suelta los archivos aquí',
+      loaded: '{fmt} abierto',
+      all: 'Los {n} formatos abiertos',
+      hint: 'Haz clic en un icono para lanzarlo',
+    },
+    aigc: {
+      prompt: 'Una chica cyberpunk con chaqueta con capucha',
+      generate: 'Generar',
+      generating: 'Generando',
+      export: 'Exportar Raw Data',
+      text: 'Texto',
+      image: 'Imagen',
+      toAi: 'Enviar a la IA para analizar',
     },
   },
   cta: {

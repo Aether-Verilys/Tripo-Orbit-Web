@@ -6,8 +6,8 @@ export default {
   },
   hero: {
     badge: 'Moteur de visualisation 3D nouvelle génération',
-    title1: "Explorez l'univers 3D,",
-    title2: 'Rendu en millisecondes',
+    title1: 'Tripo Orbit',
+    title2: 'Visionneuse 3D haute performance',
     subtitle: 'Tripo Orbit est conçu pour des performances ultimes.',
     subtitle2: 'Simple et épuré. Visualiser des modèles 3D est aussi facile que regarder une image.',
     downloadMac: 'Télécharger pour Mac',
@@ -25,14 +25,41 @@ export default {
     },
     compat: {
       tag: 'COMPATIBILITÉ',
-      title: 'Compatibilité multiplateforme transparente',
-      desc: "Prise en charge native de GLTF, FBX, OBJ, STL et de plus de 10 formats, avec aperçu dans la barre latérale de Windows et ouverture des fichiers par double-clic pour une consultation plus pratique des modèles.",
+      title: 'Plus de 10 formats pris en charge',
+      desc: 'Ouvre nativement GLTF, FBX, OBJ, STL et plus de 10 formats. Aucune conversion : il suffit de déposer le fichier.',
       note: 'Prend en charge la visualisation multi-format, l\'inspection des matériaux et textures, ainsi que l\'aperçu des animations',
+    },
+    platform: {
+      tag: 'MULTIPLATEFORME',
+      title: 'Compatibilité multiplateforme transparente',
+      desc: 'Disponible sur Windows et macOS. Aperçu dans le volet latéral de Windows, ouverture par double-clic.',
     },
     api: {
       tag: 'PILOTÉ PAR IA',
       title: 'Workflow 3D AIGC',
       desc: "La prise en charge intégrée des API permet de générer directement des assets 3D à partir de texte et d'images, puis d'exporter les Raw Data du modèle pour l'analyse par l'IA, afin de réunir génération et compréhension dans un même workflow",
+    },
+  },
+  demo: {
+    faces: 'faces',
+    verts: 'sommets',
+    perf: {
+      loadedIn: 'Chargé en {t} s',
+    },
+    formats: {
+      drop: 'Déposez vos fichiers ici',
+      loaded: '{fmt} ouvert',
+      all: 'Les {n} formats sont ouverts',
+      hint: 'Cliquez sur une icône pour la lancer',
+    },
+    aigc: {
+      prompt: 'Une fille cyberpunk en veste à capuche',
+      generate: 'Générer',
+      generating: 'Génération',
+      export: 'Exporter les Raw Data',
+      text: 'Texte',
+      image: 'Image',
+      toAi: 'Envoyer à l\'IA pour analyse',
     },
   },
   cta: {
