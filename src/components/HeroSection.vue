@@ -8,6 +8,7 @@ import winIcon from '../assets/windows.webp';
 import demoVideo from '../assets/demo.mp4';
 import demoPoster from '../assets/demo-poster.webp';
 import HeroFileBridge from './HeroFileBridge.vue';
+import HeroModels from './HeroModels.vue';
 
 const { t } = useI18n();
 
@@ -15,16 +16,23 @@ const mouseX = ref(0);
 const mouseY = ref(0);
 const smoothX = ref(0);
 const smoothY = ref(0);
-let raf: number;
+let raf = 0;
+
+// The loop only runs while something is still easing; mouse moves and scrolling wake it up again
+const wake = () => {
+  if (!raf) raf = requestAnimationFrame(animate);
+};
 
 const onMouseMove = (e: MouseEvent) => {
   mouseX.value = e.clientX / window.innerWidth - 0.5;
   mouseY.value = e.clientY / window.innerHeight - 0.5;
+  wake();
 };
 
 const onMouseLeave = () => {
   mouseX.value = 0;
   mouseY.value = 0;
+  wake();
 };
 
 // 1 while the viewer sits at the bottom of the viewport, easing to 0 as it scrolls up into view
@@ -32,22 +40,43 @@ const viewerWrap = ref<HTMLElement | null>(null);
 const scrollTilt = ref(0);
 const reducedMotion = usePreferredReducedMotion();
 
-const animate = () => {
-  smoothX.value += (mouseX.value - smoothX.value) * 0.08;
-  smoothY.value += (mouseY.value - smoothY.value) * 0.08;
+const EPS = 0.0005;
+
+function animate() {
+  raf = 0;
+  let moving = false;
+  const ease = (from: number, to: number, k: number) => {
+    const d = to - from;
+    if (Math.abs(d) < EPS) return to;
+    moving = true;
+    return from + d * k;
+  };
+
+  smoothX.value = ease(smoothX.value, mouseX.value, 0.08);
+  smoothY.value = ease(smoothY.value, mouseY.value, 0.08);
 
   const el = viewerWrap.value;
   if (el && reducedMotion.value !== 'reduce') {
     const vh = window.innerHeight;
     const target = Math.min(1, Math.max(0, (el.getBoundingClientRect().top - vh * 0.2) / (vh * 0.8)));
-    scrollTilt.value += (target - scrollTilt.value) * 0.12;
+    scrollTilt.value = ease(scrollTilt.value, target, 0.12);
   }
 
-  raf = requestAnimationFrame(animate);
-};
+  if (moving) raf = requestAnimationFrame(animate);
+}
 
-onMounted(() => { raf = requestAnimationFrame(animate); });
-onUnmounted(() => cancelAnimationFrame(raf));
+onMounted(() => {
+  window.addEventListener('scroll', wake, { passive: true });
+  window.addEventListener('resize', wake, { passive: true });
+  wake();
+  // The viewer's own entrance animation moves it without a scroll, so settle the tilt again once that has played
+  setTimeout(wake, 1900);
+});
+onUnmounted(() => {
+  window.removeEventListener('scroll', wake);
+  window.removeEventListener('resize', wake);
+  cancelAnimationFrame(raf);
+});
 
 const viewerStyle = computed(() => ({
   transform: `rotateX(${scrollTilt.value * 14 - smoothY.value * 20}deg) rotateY(${smoothX.value * 20}deg) scale(${1 - scrollTilt.value * 0.06})`,
@@ -57,6 +86,7 @@ const viewerStyle = computed(() => ({
 
 <template>
   <section class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-12 px-6 overflow-hidden">
+    <HeroModels />
     <div class="text-center max-w-4xl mx-auto z-10 mt-12">
       <!-- Badge -->
       <div
@@ -77,7 +107,7 @@ const viewerStyle = computed(() => ({
         class="text-5xl md:text-7xl font-bold tracking-tight leading-tight mb-6"
       >
         {{ t('hero.title1') }}<br />
-        <span class="text-brand glow-text">{{ t('hero.title2') }}</span>
+        <span class="text-brand glow-text" :data-glow="t('hero.title2')">{{ t('hero.title2') }}</span>
       </h1>
 
       <!-- Subtitle -->
@@ -124,12 +154,12 @@ const viewerStyle = computed(() => ({
       :initial="{ opacity: 0, y: 40 }"
       :enter="{ opacity: 1, y: 0, transition: { duration: 1000, delay: 800, ease: 'easeOut' } }"
       ref="viewerWrap"
-      class="relative w-full max-w-5xl mx-auto mt-20 z-10 hidden md:block"
+      class="relative w-full max-w-6xl mx-auto mt-20 z-10 hidden md:block"
       style="perspective: 1200px"
       @mousemove="onMouseMove"
       @mouseleave="onMouseLeave"
     >
-      <div class="hero-glow absolute inset-x-10 -inset-y-6 -z-10 rounded-[4rem] bg-brand/15 blur-3xl"></div>
+      <div class="hero-glow absolute -inset-x-6 -inset-y-20 -z-10 bg-[radial-gradient(ellipse_closest-side,rgba(249,207,0,0.15),rgba(249,207,0,0.06)_60%,transparent)]"></div>
       <div
         :style="viewerStyle"
         class="relative w-full rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.7),0_10px_30px_-5px_rgba(249,207,0,0.15)]"
@@ -137,7 +167,7 @@ const viewerStyle = computed(() => ({
         <video
           :src="demoVideo"
           :poster="demoPoster"
-          width="1260"
+          width="1558"
           height="974"
           autoplay
           loop
@@ -153,13 +183,13 @@ const viewerStyle = computed(() => ({
       v-motion
       :initial="{ opacity: 0, y: 40 }"
       :enter="{ opacity: 1, y: 0, transition: { duration: 1000, delay: 800, ease: 'easeOut' } }"
-      class="w-full max-w-5xl mx-auto mt-20 z-10 md:hidden"
+      class="w-full max-w-6xl mx-auto mt-20 z-10 md:hidden"
     >
       <div class="relative w-full rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.7),0_10px_30px_-5px_rgba(249,207,0,0.15)]">
         <video
           :src="demoVideo"
           :poster="demoPoster"
-          width="1260"
+          width="1558"
           height="974"
           autoplay
           loop
@@ -189,6 +219,7 @@ const viewerStyle = computed(() => ({
   50% { opacity: 1; transform: scale(1.03); }
 }
 .hero-glow {
+  will-change: transform, opacity;
   animation: hero-glow-pulse 6s ease-in-out infinite;
 }
 </style>

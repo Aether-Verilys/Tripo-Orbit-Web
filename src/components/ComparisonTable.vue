@@ -73,18 +73,17 @@ const renderStars = (rating: number) => {
   return Array.from({ length: 5 }, (_, i) => i < rating);
 };
 
-// Rows and stars play their entrance once the table scrolls into view
+// Rows and stars play their entrance whenever the table scrolls into view, and reset once it has fully left
 const tableRef = ref<HTMLElement | null>(null);
 const inView = ref(false);
-const { stop } = useIntersectionObserver(
+useIntersectionObserver(
   tableRef,
   ([entry]) => {
-    if (entry?.isIntersecting) {
-      inView.value = true;
-      stop();
-    }
+    if (!entry) return;
+    if (entry.intersectionRatio >= 0.15) inView.value = true;
+    else if (!entry.isIntersecting) inView.value = false;
   },
-  { threshold: 0.15 },
+  { threshold: [0, 0.15] },
 );
 </script>
 
@@ -94,7 +93,7 @@ const { stop } = useIntersectionObserver(
       <div
         v-motion
         :initial="{ opacity: 0, y: 20 }"
-        :visible-once="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+        :visible="{ opacity: 1, y: 0, transition: { duration: 600 } }"
         class="text-center mb-16"
       >
         <h2 class="text-3xl md:text-5xl font-bold mb-6 font-display tracking-wide">

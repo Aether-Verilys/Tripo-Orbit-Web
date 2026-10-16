@@ -18,7 +18,7 @@ const downloadUrl = computed(() =>
     <div
       v-motion
       :initial="{ opacity: 0, y: 30 }"
-      :visible-once="{ opacity: 1, y: 0, transition: { duration: 800 } }"
+      :visible="{ opacity: 1, y: 0, transition: { duration: 800 } }"
       class="max-w-3xl mx-auto flex flex-col items-center"
     >
       <h2 class="text-4xl md:text-5xl font-bold mb-8 tracking-tight text-white">{{ t('cta.title') }}</h2>

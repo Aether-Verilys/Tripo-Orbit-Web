@@ -34,7 +34,7 @@ const faqs = [
       <div
         v-motion
         :initial="{ opacity: 0, y: 30 }"
-        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+        :visible="{ opacity: 1, y: 0, transition: { duration: 600 } }"
         class="text-center mb-16"
       >
         <h2 class="text-4xl md:text-5xl font-bold mb-4">
@@ -50,7 +50,7 @@ const faqs = [
           :key="index"
           v-motion
           :initial="{ opacity: 0, y: 20 }"
-          :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500, delay: index * 60 } }"
+          :visible="{ opacity: 1, y: 0, transition: { duration: 500, delay: index * 60 } }"
           class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden transition-colors hover:border-white/20"
           :class="{ 'border-[#F9CF00]/30 bg-[#F9CF00]/5': openSet.has(index) }"
         >

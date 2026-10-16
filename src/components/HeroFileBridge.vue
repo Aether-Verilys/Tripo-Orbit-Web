@@ -67,7 +67,7 @@ const tiltStyle = computed(() => ({ transform: `rotateY(${tilt.value.x * 14}deg)
     <!-- Unknown file -->
     <div class="flex flex-col items-center gap-2 w-24">
       <div class="transition-transform duration-200 ease-out" :style="tiltStyle">
-        <div :key="pending" class="unknown-bob relative w-16 h-20 sm:w-20 sm:h-[100px] drop-shadow-[0_10px_18px_rgba(0,0,0,0.5)] group-hover:scale-105 transition-transform duration-300" :class="{ 'file-send': busy }">
+        <div :key="pending" class="unknown-bob relative w-16 h-20 sm:w-20 sm:h-[6.25rem] drop-shadow-[0_10px_18px_rgba(0,0,0,0.5)] group-hover:scale-105 transition-transform duration-300" :class="{ 'file-send': busy }">
           <svg viewBox="0 0 80 100" class="absolute inset-0 w-full h-full overflow-visible">
             <!-- White sheet with a folded corner, matching the Orbit file icons on the right -->
             <path d="M10 4h40l22 22v64a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6V10a6 6 0 0 1 6-6z" fill="#f1f1f3" />
@@ -88,20 +88,20 @@ const tiltStyle = computed(() => ({ transform: `rotateY(${tilt.value.x * 14}deg)
         <path d="M2 2l8 6-8 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
       <!-- Pulse that carries the file across -->
-      <span v-if="sends" :key="sends" class="arrow-pulse absolute top-1/2 w-2.5 h-2.5 -mt-[5px] -ml-[5px] rounded-full bg-brand shadow-[0_0_12px_4px_rgba(249,207,0,0.6)]"></span>
+      <span v-if="sends" :key="sends" class="arrow-pulse absolute top-1/2 w-2.5 h-2.5 -mt-[0.3125rem] -ml-[0.3125rem] rounded-full bg-brand shadow-[0_0_12px_4px_rgba(249,207,0,0.6)]"></span>
     </div>
 
     <!-- The same file once Orbit owns it -->
     <div class="flex flex-col items-center gap-2 w-24">
       <div class="transition-transform duration-200 ease-out" :style="tiltStyle">
-        <div class="relative w-16 h-20 sm:w-20 sm:h-[100px] group-hover:scale-105 transition-transform duration-300">
+        <div class="relative w-16 h-20 sm:w-20 sm:h-[6.25rem] group-hover:scale-105 transition-transform duration-300">
           <span class="absolute inset-[-30%] rounded-full bg-brand/20 blur-2xl"></span>
           <span :key="`ring-${opened}`" class="open-ring absolute inset-0 m-auto w-16 h-16 rounded-full border-2 border-brand"></span>
           <img :key="opened" :src="iconFor(openedFmt)" class="open-pop relative w-full h-full object-contain drop-shadow-[0_10px_18px_rgba(0,0,0,0.5)]" :alt="openedFmt" />
         </div>
       </div>
       <span :key="opened" class="file-in flex items-center gap-1 font-mono text-xs text-brand">
-        model.{{ openedFmt }} <Check class="w-3 h-3" />
+        model <Check class="w-3 h-3" />
       </span>
     </div>
   </button>

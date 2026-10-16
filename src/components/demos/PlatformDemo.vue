@@ -10,24 +10,21 @@ import { useDemoLoop, type Wait } from '../../composables/useDemoLoop';
 import appIcon from '../../assets/app.webp';
 import macIcon from '../../assets/mac.webp';
 import winIcon from '../../assets/windows.webp';
-import viewportPoster from '../../assets/viewport-poster.webp';
 
 const icons = import.meta.glob<string>('../../assets/formats/*.webp', { eager: true, import: 'default' });
 const models = import.meta.glob<string>('../../assets/models/*.webp', { eager: true, import: 'default' });
 
-// The same folder of models, browsed on each OS. Trinity's still is the real viewport frame (opaque);
-// the others are cut-outs shown over the pane's own background.
+// The same folder of models, browsed on each OS; each still is a cut-out shown over the pane's own background
 const FILES = [
-  { name: 'Trinity.glb', fmt: 'glb', type: 'GLB File', still: viewportPoster, opaque: true },
-  { name: 'claw_machine.fbx', fmt: 'fbx', type: 'FBX File' },
-  { name: 'aquarium_lamp.obj', fmt: 'obj', type: 'OBJ File' },
-  { name: 'goblin.gltf', fmt: 'gltf', type: 'GLTF File' },
-  { name: 'armor.stl', fmt: 'stl', type: 'STL File' },
+  { name: 'motorcycle.glb', fmt: 'glb', type: 'GLB File' },
+  { name: 'boat_tavern.fbx', fmt: 'fbx', type: 'FBX File' },
+  { name: 'fantasy_queen.obj', fmt: 'obj', type: 'OBJ File' },
+  { name: 'leather_satchel.gltf', fmt: 'gltf', type: 'GLTF File' },
+  { name: 'spider_demon.stl', fmt: 'stl', type: 'STL File' },
 ].map((f) => ({
-  opaque: false,
   ...f,
   icon: icons[`../../assets/formats/${f.fmt}.webp`],
-  still: f.still ?? models[`../../assets/models/${f.fmt}.webp`],
+  still: models[`../../assets/models/${f.fmt}.webp`],
 }));
 
 const SYSTEMS = [
@@ -153,7 +150,7 @@ const slot = (id: SystemId) =>
       <!-- ───────── Windows 11: File Explorer with the preview pane ───────── -->
       <div
         ref="winEl"
-        class="os-window absolute w-full sm:w-[90%] aspect-[4/3] sm:aspect-[16/10] flex flex-col rounded-lg overflow-hidden border border-white/10 bg-[#202020] text-[10px] text-white/80 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.8)]"
+        class="os-window absolute w-full sm:w-[90%] aspect-[4/3] sm:aspect-[16/10] flex flex-col rounded-lg overflow-hidden border border-white/10 bg-[#202020] text-[0.625rem] text-white/80 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.8)]"
         :class="slot('win')"
         @click="show('win')"
       >
@@ -190,7 +187,7 @@ const slot = (id: SystemId) =>
             <li
               v-for="item in WIN_NAV"
               :key="item.label"
-              class="flex items-center gap-1.5 mx-1 px-1.5 py-[3px] rounded"
+              class="flex items-center gap-1.5 mx-1 px-1.5 py-[0.1875rem] rounded"
               :class="{ 'bg-white/10 text-white': item.label === 'Downloads' }"
             >
               <component :is="item.icon" class="w-3 h-3 shrink-0" /> {{ item.label }}
@@ -207,7 +204,7 @@ const slot = (id: SystemId) =>
               v-for="(f, i) in FILES"
               :key="f.name"
               :ref="(el) => { if (el) winRows[i] = el as HTMLElement; }"
-              class="relative flex items-center mx-1 px-2 py-[3px] rounded transition-colors duration-150"
+              class="relative flex items-center mx-1 px-2 py-[0.1875rem] rounded transition-colors duration-150"
               :class="i === winSel ? 'bg-white/[0.12]' : ''"
             >
               <span v-if="i === winSel" class="absolute left-0 top-1 bottom-1 w-0.5 rounded-full bg-[#4cc2ff]"></span>
@@ -224,8 +221,7 @@ const slot = (id: SystemId) =>
                 v-if="winSel >= 0"
                 :key="winSel"
                 :src="FILES[winSel].still"
-                class="preview-in absolute inset-0 w-full h-full"
-                :class="FILES[winSel].opaque ? 'object-cover' : 'object-contain p-[8%]'"
+                class="preview-in absolute inset-0 w-full h-full object-contain p-[8%]"
                 alt=""
               />
               <span v-else class="absolute inset-0 flex items-center justify-center px-3 text-center text-white/30">Select a file to preview.</span>
@@ -237,7 +233,7 @@ const slot = (id: SystemId) =>
           </div>
         </div>
 
-        <div class="flex items-center h-5 px-3 gap-3 bg-[#1c1c1c] border-t border-black/40 text-[9px] text-white/45 shrink-0">
+        <div class="flex items-center h-5 px-3 gap-3 bg-[#1c1c1c] border-t border-black/40 text-[0.5625rem] text-white/45 shrink-0">
           <span>{{ FILES.length }} items</span>
           <span v-if="winSel >= 0">1 item selected</span>
         </div>
@@ -248,7 +244,7 @@ const slot = (id: SystemId) =>
       <!-- ───────── macOS: Finder, double-click to open in Orbit ───────── -->
       <div
         ref="macEl"
-        class="os-window absolute w-full sm:w-[90%] aspect-[4/3] sm:aspect-[16/10] flex flex-col rounded-xl overflow-hidden border border-white/15 bg-[#1e1e1e] text-[10px] text-white/80 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.8)]"
+        class="os-window absolute w-full sm:w-[90%] aspect-[4/3] sm:aspect-[16/10] flex flex-col rounded-xl overflow-hidden border border-white/15 bg-[#1e1e1e] text-[0.625rem] text-white/80 shadow-[0_24px_60px_-12px_rgba(0,0,0,0.8)]"
         :class="slot('mac')"
         @click="show('mac')"
       >
@@ -260,12 +256,12 @@ const slot = (id: SystemId) =>
               <span class="w-2 h-2 rounded-full bg-[#febc2e]"></span>
               <span class="w-2 h-2 rounded-full bg-[#28c840]"></span>
             </div>
-            <p class="px-3 pb-1 text-[9px] font-semibold text-white/35">Favorites</p>
+            <p class="px-3 pb-1 text-[0.5625rem] font-semibold text-white/35">Favorites</p>
             <ul class="text-white/75">
               <li
                 v-for="item in MAC_NAV"
                 :key="item.label"
-                class="flex items-center gap-1.5 mx-1.5 px-1.5 py-[3px] rounded-md"
+                class="flex items-center gap-1.5 mx-1.5 px-1.5 py-[0.1875rem] rounded-md"
                 :class="{ 'bg-white/10': item.label === 'Downloads' }"
               >
                 <component :is="item.icon" class="w-3 h-3 shrink-0 text-[#3b9bff]" /> {{ item.label }}
@@ -304,7 +300,7 @@ const slot = (id: SystemId) =>
                 <span class="max-w-full px-1 rounded truncate leading-tight" :class="i === macSel ? 'bg-[#0a5fd7] text-white' : ''">{{ f.name }}</span>
               </div>
             </div>
-            <div class="h-5 flex items-center justify-center border-t border-black/50 text-[9px] text-white/40 shrink-0">
+            <div class="h-5 flex items-center justify-center border-t border-black/50 text-[0.5625rem] text-white/40 shrink-0">
               {{ macSel >= 0 ? `1 of ${FILES.length} selected` : `${FILES.length} items` }}
             </div>
           </div>
@@ -319,8 +315,7 @@ const slot = (id: SystemId) =>
             <img
               :key="macSel"
               :src="FILES[macSel].still"
-              class="absolute inset-0 w-full h-full"
-              :class="FILES[macSel].opaque ? 'object-cover' : 'object-contain p-[6%]'"
+              class="absolute inset-0 w-full h-full object-contain p-[6%]"
               alt=""
             />
             <template #panel>

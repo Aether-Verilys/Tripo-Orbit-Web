@@ -167,11 +167,26 @@ onMounted(() => {
     }
   };
 
+  // Built once per size instead of every frame
+  let orbGradient: CanvasGradient;
+
   const resize = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    orbGradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, 200);
+    orbGradient.addColorStop(0, 'rgba(249, 207, 0, 0.12)');
+    orbGradient.addColorStop(0.3, 'rgba(249, 207, 0, 0.04)');
+    orbGradient.addColorStop(1, 'transparent');
     init();
   };
+
+  // Connections and dots are quantised into a few alpha levels so each level is one path and one draw call,
+  // rather than one stroke()/fill() per line or dot
+  const ALPHA_LEVELS = 8;
+  const linePaths: Path2D[] = [];
+  const dotPaths: Record<string, Path2D[]> = {};
 
   window.addEventListener('resize', resize);
   resize();
@@ -203,11 +218,7 @@ onMounted(() => {
     const tiltY = Math.PI / 12 + mouseX * 0.15;
 
     // Glowing orb
-    const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 200);
-    gradient.addColorStop(0, 'rgba(249, 207, 0, 0.12)');
-    gradient.addColorStop(0.3, 'rgba(249, 207, 0, 0.04)');
-    gradient.addColorStop(1, 'transparent');
-    ctx.fillStyle = gradient;
+    ctx.fillStyle = orbGradient;
     ctx.beginPath();
     ctx.arc(centerX, centerY, 200, 0, Math.PI * 2);
     ctx.fill();
@@ -278,7 +289,7 @@ onMounted(() => {
     pointsToDraw.sort((a, b) => b.depth - a.depth);
 
     // Connections
-    ctx.lineWidth = 0.5;
+    for (let k = 0; k < ALPHA_LEVELS; k++) linePaths[k] = new Path2D();
     for (let i = 0; i < pointsToDraw.length; i++) {
       if (i % 3 !== 0) continue;
       const p1 = pointsToDraw[i];
@@ -294,28 +305,42 @@ onMounted(() => {
         const distSq = dx * dx + dy * dy;
         if (distSq < 6400) {
           const dist = Math.sqrt(distSq);
-          ctx.beginPath();
-          ctx.moveTo(p1.cx, p1.cy);
-          ctx.lineTo(p2.cx, p2.cy);
-          const alpha = (1 - dist / 80) * 0.25 * (1 - p1.originalRadius / 500);
-          ctx.strokeStyle = `rgba(249, 207, 0, ${Math.max(0, alpha)})`;
-          ctx.stroke();
+          // 0..1 strength; the drawn alpha is strength * 0.25
+          const strength = (1 - dist / 80) * (1 - p1.originalRadius / 500);
+          if (strength <= 0) continue;
+          const path = linePaths[Math.min(ALPHA_LEVELS - 1, Math.floor(strength * ALPHA_LEVELS))];
+          path.moveTo(p1.cx, p1.cy);
+          path.lineTo(p2.cx, p2.cy);
         }
       }
     }
+    ctx.lineWidth = 0.5;
+    ctx.strokeStyle = 'rgb(249, 207, 0)';
+    for (let k = 0; k < ALPHA_LEVELS; k++) {
+      ctx.globalAlpha = ((k + 0.5) / ALPHA_LEVELS) * 0.25;
+      ctx.stroke(linePaths[k]);
+    }
+    ctx.globalAlpha = 1;
 
     // Dots
+    for (const color in dotPaths) for (let k = 0; k < ALPHA_LEVELS; k++) dotPaths[color][k] = new Path2D();
     pointsToDraw.forEach((pt) => {
       if (pt.cx > -10 && pt.cx < canvas.width + 10 && pt.cy > -10 && pt.cy < canvas.height + 10) {
-        ctx.beginPath();
         const fade = Math.max(0.1, Math.min(1, 1 - pt.depth / 800));
-        const opacity = fade * (1 - pt.originalRadius / (Math.max(canvas.width, canvas.height) * 0.8));
-        ctx.globalAlpha = Math.max(0.05, opacity);
-        ctx.fillStyle = pt.color;
-        ctx.arc(pt.cx, pt.cy, pt.size, 0, Math.PI * 2);
-        ctx.fill();
+        const opacity = Math.min(1, Math.max(0.05, fade * (1 - pt.originalRadius / (Math.max(canvas.width, canvas.height) * 0.8))));
+        const paths = (dotPaths[pt.color] ??= Array.from({ length: ALPHA_LEVELS }, () => new Path2D()));
+        const path = paths[Math.min(ALPHA_LEVELS - 1, Math.floor(opacity * ALPHA_LEVELS))];
+        path.moveTo(pt.cx + pt.size, pt.cy);
+        path.arc(pt.cx, pt.cy, pt.size, 0, Math.PI * 2);
       }
     });
+    for (const color in dotPaths) {
+      ctx.fillStyle = color;
+      for (let k = 0; k < ALPHA_LEVELS; k++) {
+        ctx.globalAlpha = (k + 0.5) / ALPHA_LEVELS;
+        ctx.fill(dotPaths[color][k]);
+      }
+    }
     ctx.globalAlpha = 1;
 
     animationFrameId = requestAnimationFrame(draw);
