@@ -104,7 +104,7 @@ useIntersectionObserver(
         </p>
       </div>
 
-      <div ref="tableRef" class="cmp-table overflow-x-auto" :class="{ 'is-in': inView }">
+      <div ref="tableRef" class="cmp-table overflow-x-auto overflow-y-hidden" :class="{ 'is-in': inView }">
         <table class="w-full text-left border-collapse">
           <thead>
             <tr>
@@ -159,6 +159,16 @@ useIntersectionObserver(
   0% { opacity: 0; transform: scale(0.3); }
   70% { opacity: 1; transform: scale(1.25); }
   100% { opacity: 1; transform: scale(1); }
+}
+
+/*
+ * Only horizontal scrolling is wanted here. overflow-x:auto makes overflow-y compute to auto as well, and the
+ * rows' translateY entrance counts as overflow, so a vertical scrollbar flashed up while the last row slid in.
+ * The scrollbar that remains (narrow screens) is thin and translucent instead of the white system one.
+ */
+.cmp-table {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
 }
 
 .cmp-table:not(.is-in) .cmp-row {

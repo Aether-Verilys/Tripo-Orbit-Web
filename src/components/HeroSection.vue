@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { usePreferredReducedMotion } from '@vueuse/core';
+import { useMediaQuery, usePreferredReducedMotion } from '@vueuse/core';
 import { Rotate3D, ChevronDown } from 'lucide-vue-next';
 import macIcon from '../assets/mac.webp';
 import winIcon from '../assets/windows.webp';
-import demoVideo from '../assets/demo.mp4';
-import demoPoster from '../assets/demo-poster.webp';
 import HeroFileBridge from './HeroFileBridge.vue';
 import HeroModels from './HeroModels.vue';
+import HeroThemeVideo from './HeroThemeVideo.vue';
 
 const { t } = useI18n();
 
@@ -39,6 +38,8 @@ const onMouseLeave = () => {
 const viewerWrap = ref<HTMLElement | null>(null);
 const scrollTilt = ref(0);
 const reducedMotion = usePreferredReducedMotion();
+// Only one viewer is mounted, so the theme clips are never decoded twice
+const isDesktop = useMediaQuery('(min-width: 768px)');
 
 const EPS = 0.0005;
 
@@ -148,56 +149,31 @@ const viewerStyle = computed(() => ({
       </div>
     </div>
 
-    <!-- Interactive Parallax Viewer with Demo Video -->
+    <!-- Interactive Parallax Viewer with theme demo videos -->
     <div
+      v-if="isDesktop"
       v-motion
       :initial="{ opacity: 0, y: 40 }"
       :enter="{ opacity: 1, y: 0, transition: { duration: 1000, delay: 800, ease: 'easeOut' } }"
       ref="viewerWrap"
-      class="relative w-full max-w-6xl mx-auto mt-20 z-10 hidden md:block"
+      class="relative w-full max-w-6xl mx-auto mt-20 z-10"
       style="perspective: 1200px"
       @mousemove="onMouseMove"
       @mouseleave="onMouseLeave"
     >
       <div class="hero-glow absolute -inset-x-6 -inset-y-20 -z-10 bg-[radial-gradient(ellipse_closest-side,rgba(249,207,0,0.15),rgba(249,207,0,0.06)_60%,transparent)]"></div>
-      <div
-        :style="viewerStyle"
-        class="relative w-full rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.7),0_10px_30px_-5px_rgba(249,207,0,0.15)]"
-      >
-        <video
-          :src="demoVideo"
-          :poster="demoPoster"
-          width="1558"
-          height="974"
-          autoplay
-          loop
-          muted
-          playsinline
-          class="w-full h-auto block"
-        />
-      </div>
+      <HeroThemeVideo :frame-style="viewerStyle" />
     </div>
 
     <!-- Mobile fallback (no parallax) -->
     <div
+      v-else
       v-motion
       :initial="{ opacity: 0, y: 40 }"
       :enter="{ opacity: 1, y: 0, transition: { duration: 1000, delay: 800, ease: 'easeOut' } }"
-      class="w-full max-w-6xl mx-auto mt-20 z-10 md:hidden"
+      class="w-full max-w-6xl mx-auto mt-20 z-10"
     >
-      <div class="relative w-full rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.7),0_10px_30px_-5px_rgba(249,207,0,0.15)]">
-        <video
-          :src="demoVideo"
-          :poster="demoPoster"
-          width="1558"
-          height="974"
-          autoplay
-          loop
-          muted
-          playsinline
-          class="w-full h-auto block"
-        />
-      </div>
+      <HeroThemeVideo />
     </div>
 
     <!-- Scroll indicator -->
