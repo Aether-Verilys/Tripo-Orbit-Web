@@ -121,7 +121,7 @@ useDemoLoop(stage, async (wait) => {
           class="click-ring absolute inset-0 m-auto w-8 h-8 rounded-full border-2 border-brand"
         ></span>
       </div>
-      <span translate="no" class="notranslate px-1.5 rounded text-[11px] text-white/80" :class="{ 'bg-brand/30': clicks > 0 && !windowOpen }">Trinity.glb</span>
+      <span translate="no" class="notranslate px-1.5 rounded text-[0.6875rem] text-white/80" :class="{ 'bg-brand/30': clicks > 0 && !windowOpen }">Trinity.glb</span>
     </div>
 
     <!-- App window, scaling out of the file icon -->
@@ -163,7 +163,7 @@ useDemoLoop(stage, async (wait) => {
 
         <!-- Result badge; its digits stay hidden until the flying ones land on them -->
         <div
-          class="absolute top-2 left-2 px-2 py-1 rounded-md bg-black/60 border border-brand/40 text-brand text-[10px] font-mono whitespace-nowrap transition-opacity duration-300"
+          class="absolute top-2 left-2 px-2 py-1 rounded-md bg-black/60 border border-brand/40 text-brand text-[0.625rem] font-mono whitespace-nowrap transition-opacity duration-300"
           :class="phase === 'docking' || phase === 'loaded' ? 'opacity-100' : 'opacity-0'"
         >
           ⚡ {{ badgeText[0] }}<span ref="badgeDigits" class="inline-block font-display font-bold italic tabular-nums" :class="phase === 'loaded' ? 'visible' : 'invisible'">{{ LOAD_LABEL }}</span>{{ badgeText[1] }}

@@ -26,7 +26,7 @@ const features = [
       <div
         v-motion
         :initial="{ opacity: 0, y: 20 }"
-        :visible-once="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+        :visible="{ opacity: 1, y: 0, transition: { duration: 600 } }"
         class="mb-12 text-center"
       >
         <h2 class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">{{ t('features.heading') }}</h2>
@@ -56,9 +56,9 @@ const features = [
         <div
           v-motion
           :initial="{ opacity: 0, scale: 0.9 }"
-          :visible-once="{ opacity: 1, scale: 1, transition: { duration: 600 } }"
+          :visible="{ opacity: 1, scale: 1, transition: { duration: 600 } }"
           v-spotlight
-          class="w-full lg:w-7/12 h-[min(560px,85vh)] sm:h-auto sm:aspect-[4/3] rounded-[2rem] glass-panel border border-white/10 bg-black/50 shadow-2xl overflow-hidden relative flex flex-col hover:border-brand/30 transition-colors duration-500"
+          class="w-full lg:w-7/12 h-[min(35rem,85vh)] sm:h-auto sm:aspect-[4/3] rounded-[2rem] border border-white/10 bg-[#0c0c0c]/85 shadow-2xl overflow-hidden relative flex flex-col hover:border-brand/30 transition-colors duration-500"
           :class="{ 'lg:order-1': f.flip }"
         >
           <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(249,207,0,0.06)_0%,transparent_70%)] pointer-events-none"></div>

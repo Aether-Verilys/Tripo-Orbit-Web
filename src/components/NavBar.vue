@@ -20,7 +20,7 @@ const scrolled = computed(() => y.value > 40);
       <img :src="appIcon" class="w-10 h-10 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110" alt="Tripo Orbit" />
       <div class="flex items-center gap-2">
         <span class="text-xl font-display font-bold tracking-widest text-white">TRIPO Orbit</span>
-        <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brand text-black tracking-widest mt-0.5">BETA</span>
+        <span class="px-2 py-0.5 rounded text-[0.625rem] font-mono font-bold bg-brand text-black tracking-widest mt-0.5">BETA</span>
       </div>
     </div>
     <LangSwitcher />

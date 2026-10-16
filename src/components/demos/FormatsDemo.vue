@@ -4,15 +4,13 @@ import { useI18n } from 'vue-i18n';
 import { Check, Upload } from 'lucide-vue-next';
 import OrbitWindow from './OrbitWindow.vue';
 import { useDemoLoop } from '../../composables/useDemoLoop';
-import viewportVideo from '../../assets/viewport.mp4';
-import viewportPoster from '../../assets/viewport-poster.webp';
 import macIcon from '../../assets/mac.webp';
 import winIcon from '../../assets/windows.webp';
 
 const icons = import.meta.glob<string>('../../assets/formats/*.webp', { eager: true, import: 'default' });
 const iconFor = (fmt: string) => icons[`../../assets/formats/${fmt.toLowerCase()}.webp`];
 
-// One still per format so each file that lands shows a different model; GLB plays the real viewport recording instead
+// One still per format so each file that lands shows a different model
 const models = import.meta.glob<string>('../../assets/models/*.webp', { eager: true, import: 'default' });
 const modelFor = (fmt: string) => models[`../../assets/models/${fmt.toLowerCase()}.webp`];
 
@@ -26,7 +24,6 @@ type Flyer = { id: number; fmt: string; from: { x: number; y: number } };
 const stage = ref<HTMLElement | null>(null);
 const windowEl = ref<HTMLElement | null>(null);
 const viewportEl = ref<HTMLElement | null>(null);
-const video = ref<HTMLVideoElement | null>(null);
 
 const flyers = ref<Flyer[]>([]);
 const loaded = ref<Set<string>>(new Set());
@@ -56,8 +53,6 @@ const impact = (fmt: string) => {
   loaded.value = new Set(loaded.value).add(fmt);
   lastFmt.value = fmt;
   flashKey.value++;
-  if (fmt === 'GLB') video.value?.play().catch(() => {});
-  else video.value?.pause();
   windowEl.value?.animate(
     [
       { transform: 'translate(0, 0) scale(1)' },
@@ -102,7 +97,6 @@ const throwFromTray = (fmt: string, e: MouseEvent) => {
 useDemoLoop(stage, async (wait) => {
   loaded.value = new Set();
   lastFmt.value = null;
-  video.value?.pause();
   await wait(500);
 
   // One file at a time, in list order, each held long enough for its model to register
@@ -120,19 +114,8 @@ useDemoLoop(stage, async (wait) => {
     <div ref="windowEl" class="w-full sm:w-auto sm:flex-1 sm:min-w-0 relative">
       <OrbitWindow :title="title" class="aspect-[1/1.05] sm:aspect-[4/3]">
         <div ref="viewportEl" class="absolute inset-0">
-          <video
-            ref="video"
-            :src="viewportVideo"
-            :poster="viewportPoster"
-            muted
-            loop
-            playsinline
-            preload="auto"
-            class="absolute inset-0 w-full h-full object-cover"
-            :class="lastFmt === 'GLB' ? 'model-pop' : 'hidden'"
-          />
           <img
-            v-if="lastFmt && lastFmt !== 'GLB'"
+            v-if="lastFmt"
             :key="lastFmt"
             :src="modelFor(lastFmt)"
             class="model-pop absolute inset-0 w-full h-full object-contain p-[6%]"
@@ -165,11 +148,11 @@ useDemoLoop(stage, async (wait) => {
 
         <template #panel>
           <p class="text-white/80 mb-1.5">Formats</p>
-          <ul class="space-y-[3px]">
+          <ul class="space-y-[0.1875rem]">
             <li
               v-for="fmt in FORMATS"
               :key="fmt"
-              class="flex items-center justify-between font-mono text-[9px] transition-colors duration-200"
+              class="flex items-center justify-between font-mono text-[0.5625rem] transition-colors duration-200"
               :class="loaded.has(fmt) ? 'text-white' : 'text-white/30'"
             >
               <span :class="{ 'text-brand': fmt === lastFmt }">.{{ fmt.toLowerCase() }}</span>
@@ -181,7 +164,7 @@ useDemoLoop(stage, async (wait) => {
     </div>
 
     <!-- Tray: click to throw a file in yourself -->
-    <div class="flex flex-col items-center gap-2 sm:gap-3 sm:w-[116px] sm:shrink-0">
+    <div class="flex flex-col items-center gap-2 sm:gap-3 sm:w-[7.25rem] sm:shrink-0">
       <div class="flex flex-wrap justify-center gap-1.5 px-4 sm:px-0 sm:grid sm:grid-cols-3 sm:gap-1">
         <button
           v-for="fmt in FORMATS"
@@ -193,7 +176,7 @@ useDemoLoop(stage, async (wait) => {
           <img :src="iconFor(fmt)" class="w-full h-full" :alt="fmt" />
         </button>
       </div>
-      <div class="flex sm:flex-col items-center gap-3 sm:gap-2 text-[11px] text-white/35 text-center">
+      <div class="flex sm:flex-col items-center gap-3 sm:gap-2 text-[0.6875rem] text-white/35 text-center">
         <span>{{ t('demo.formats.hint') }}</span>
         <span class="w-px h-3 sm:w-8 sm:h-px bg-white/15"></span>
         <div class="flex items-center gap-2">

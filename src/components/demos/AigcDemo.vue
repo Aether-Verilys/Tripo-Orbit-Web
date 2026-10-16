@@ -135,7 +135,7 @@ useDemoLoop(stage, async (wait) => {
             </div>
             <p class="text-white/80 mb-1.5">Raw Data</p>
             <span
-              class="flex items-center justify-center gap-1 py-1 rounded border text-[9px] transition-all duration-200"
+              class="flex items-center justify-center gap-1 py-1 rounded border text-[0.5625rem] transition-all duration-200"
               :class="[
                 phase === 'done' || phase === 'exported' ? 'border-brand/60 text-brand' : 'border-white/10 text-white/30',
                 phase === 'done' ? 'export-glow' : '',
@@ -151,7 +151,7 @@ useDemoLoop(stage, async (wait) => {
 
     <!-- Exported JSON card -->
     <div
-      class="absolute right-0 bottom-[6%] w-[52%] sm:w-[40%] rounded-xl border border-white/10 bg-black/80 backdrop-blur-md p-3 font-mono text-[10px] md:text-[11px] shadow-2xl transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.2,0.9,0.3,1.1)]"
+      class="absolute right-0 bottom-[6%] w-[52%] sm:w-[40%] rounded-xl border border-white/10 bg-black/80 backdrop-blur-md p-3 font-mono text-[0.625rem] md:text-[0.6875rem] shadow-2xl transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.2,0.9,0.3,1.1)]"
       :class="phase === 'exported' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6 pointer-events-none'"
     >
       <div class="flex items-center gap-1.5 pb-2 mb-2 border-b border-white/10 text-white/40">

@@ -21,18 +21,33 @@ body {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* The glow is painted once on a duplicate layer (data-glow) and only its opacity breathes,
+   so the compositor animates it without repainting the text every frame */
 .glow-text {
-  text-shadow: 0 0 20px rgba(249, 207, 0, 0.5);
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 16px rgba(249, 207, 0, 0.35);
+}
+.glow-text::after {
+  content: attr(data-glow);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  text-shadow: 0 0 34px rgba(249, 207, 0, 0.7);
+  pointer-events: none;
+  will-change: opacity;
   animation: glow-breathe 4s ease-in-out infinite;
 }
 
 @keyframes glow-breathe {
-  0%, 100% { text-shadow: 0 0 16px rgba(249, 207, 0, 0.35); }
-  50% { text-shadow: 0 0 34px rgba(249, 207, 0, 0.7); }
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
 }
 
 html {
   scroll-behavior: smooth;
+  /* 16px up to a 1920px-wide window, then grow with it so wide and 4K screens keep the same proportions */
+  font-size: clamp(16px, calc(100vw / 120), 24px);
 }
 
 /* Light sweep across a button on hover */
@@ -98,10 +113,10 @@ html {
 /* Buttons inside the mock Orbit window (components/demos) */
 .demo-chip {
   display: block;
-  padding: 2px 0;
-  border-radius: 4px;
+  padding: 0.125rem 0;
+  border-radius: 0.25rem;
   text-align: center;
-  font-size: 9px;
+  font-size: 0.5625rem;
   background: #4a4a4f;
   color: rgba(255, 255, 255, 0.75);
 }
