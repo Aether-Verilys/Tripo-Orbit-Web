@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useIntersectionObserver } from '@vueuse/core';
-import { Check, Star, Globe, Apple } from 'lucide-vue-next';
+import { Check, Star, Globe } from 'lucide-vue-next';
 import winIcon from '../assets/windows.webp';
 import macIcon from '../assets/mac.webp';
 
@@ -137,7 +137,7 @@ useIntersectionObserver(
               </td>
               <td class="p-4">
                 <div class="flex gap-2 items-center">
-                  <Apple v-if="viewer.platforms.includes('mac')" class="w-5 h-5" :class="viewer.highlight ? 'text-white' : 'text-gray-400'" />
+                  <img v-if="viewer.platforms.includes('mac')" :src="macIcon" alt="macOS" class="w-5 h-5" :class="!viewer.highlight && 'opacity-60 grayscale'" />
                   <img v-if="viewer.platforms.includes('win')" :src="winIcon" alt="Windows" class="w-5 h-5" :class="!viewer.highlight && 'opacity-60 grayscale'" />
                   <Globe v-if="viewer.platforms.includes('web')" class="w-5 h-5" :class="viewer.highlight ? 'text-white' : 'text-gray-400'" />
                 </div>
