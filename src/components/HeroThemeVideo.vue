@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted } from 'vue';
 import { useElementVisibility } from '@vueuse/core';
+import darkVideo from '../assets/themes/dark.mp4';
+import darkPoster from '../assets/themes/dark.webp';
 import studioVideo from '../assets/themes/studio.mp4';
 import studioPoster from '../assets/themes/studio.webp';
 import gridVideo from '../assets/themes/grid.mp4';
@@ -12,10 +14,11 @@ import gradientPoster from '../assets/themes/gradient.webp';
 
 defineProps<{ frameStyle?: Record<string, string> }>();
 
-// One recording per viewport theme, cycled on a fixed beat; the incoming theme wipes in from the left.
+// One recording per viewport theme, cycled on a fixed beat, starting on the dark one; the incoming theme wipes in from the left.
 // Every clip is exactly one period of the character's idle animation, cut to start on the same pose,
 // so the same currentTime shows the same pose in all of them and each one loops seamlessly.
 const THEMES = [
+  { name: 'Dark Mode', src: darkVideo, poster: darkPoster },
   { name: 'Studio', src: studioVideo, poster: studioPoster },
   { name: 'Grid', src: gridVideo, poster: gridPoster },
   { name: 'Blueprint', src: blueprintVideo, poster: blueprintPoster },
